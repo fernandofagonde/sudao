@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <style>
+        .row-results-custo {
+            border-radius: 4px;
+        }
+
+        .valor-input {
+            font-weight: bold;
+        }
+
+        .background-custo-0 {
+            background: #f8746d;
+        }
+
+        .background-custo-25 {
+            background: #fbaf78;
+        }
+
+        .background-custo-50 {
+            background: #ffeb84;
+        }
+
+        .background-custo-75 {
+            background: #cbdc81;
+        }
+
+        .background-custo-100 {
+            background: #7dc67d;
+        }
+
+        .row-results-custo div,
+        .row-results-preco div,
+        .row-results-produtividade div {
+            border: 1px solid #CFCFCF;
+        }
+    </style>
+</head>
+
+<body class="text-center">
+    <div class="container">
+        <div class="px-4 py-5 my-5 text-center">
+            <img class="d-block mx-auto mb-4" src="Logomarca.png" alt="" width="288" height="228">
+            <h1 class="display-5 fw-bold text-body-emphasis">Cenários Capim Sudão</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the
+                    world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive
+                    grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                <!-- <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+                </div>-->
+            </div>
+        </div>
+
+
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="card col-lg-3 col-md-3 p-2">
+                <form>
+                    <div class="form-floating mb-3">
+                        
+                        <input type="text" class="form-control" id="idCusto" placeholder="Custo (R$/hectare)"
+                            value="850">
+                            <label for="idCusto">Custo (R$/hectare)</label>
+                        
+                    </div>
+                    <div class="col-sm-12 x-0">
+                        <input type="text" class="form-control form-control-sm" id="idBaseCusto"
+                            placeholder="Escala Custo" value="150">
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="idPrecoBoiGordo"
+                            placeholder="Preço do boi gordo (R$/kg vivo)" value="5">
+                        <label for="idPrecoBoiGordo">Preço do boi gordo (R$/kg vivo)</label>
+                    </div>
+                    <div class="col-sm-12 x-0">
+                        <input type="text" class="form-control form-control-sm" id="idBasePreco"
+                            placeholder="Escala Preço" value="0.5">
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="idProdutividade"
+                            placeholder="Produtividade (kg de peso vivo/hectare)" value="300">
+                        <label for="idCusto">Produtividade (kg de peso vivo/hectare)</label>
+                    </div>
+                    <div class="col-sm-12 x-0">
+                        <input type="text" class="form-control form-control-sm" id="idBaseProdutividade"
+                            placeholder="Escala Produtividade" value="100">
+                    </div>
+                </form>
+                <div class="form-floating mb-3">
+                    <button class="w-100 btn btn-lg btn-primary" onclick="calcular()">Calcular</button>
+                </div>
+            </div>
+
+            <div class="card col-lg-9 col-md-9 ms-auto">
+                <h2>Custo</h2>
+                <div class="row">
+                    <div class="col-2">
+                        Preço do boi gordo (R$/kg vivo)
+                    </div>
+
+                    <div class="col-10">
+                        <div class="row">
+                            <div id="idCalculoCustoY1" class="base-calculo-y col" data-calc='2' data-y="1"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-custo">
+                                    <div class="col" data-x="1" data-y="1">0</div>
+                                    <div class="col" data-x="2" data-y="1">0</div>
+                                    <div class="col" data-x="3" data-y="1">0</div>
+                                    <div class="col" data-x="4" data-y="1">0</div>
+                                    <div class="col" data-x="5" data-y="1">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoCustoY2" class="base-calculo-y col" data-calc='1' data-y="2"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-custo">
+                                    <div class="col" data-x="1" data-y="2">0</div>
+                                    <div class="col" data-x="2" data-y="2">0</div>
+                                    <div class="col" data-x="3" data-y="2">0</div>
+                                    <div class="col" data-x="4" data-y="2">0</div>
+                                    <div class="col" data-x="5" data-y="2">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoCustoY3" class="base-calculo-y col valor-input" data-calc='0' data-y="3"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-custo">
+                                    <div class="col" data-x="1" data-y="3">0</div>
+                                    <div class="col" data-x="2" data-y="3">0</div>
+                                    <div class="col valor-input" data-x="3" data-y="3">0</div>
+                                    <div class="col" data-x="4" data-y="3">0</div>
+                                    <div class="col" data-x="5" data-y="3">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoCustoY4" class="base-calculo-y col" data-calc='-1' data-y="4"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-custo">
+                                    <div class="col" data-x="1" data-y="4">0</div>
+                                    <div class="col" data-x="2" data-y="4">0</div>
+                                    <div class="col" data-x="3" data-y="4">0</div>
+                                    <div class="col" data-x="4" data-y="4">0</div>
+                                    <div class="col" data-x="5" data-y="4">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoCustoY5" class="base-calculo-y col" data-calc='-2' data-y="5"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-custo">
+                                    <div class="col" data-x="1" data-y="5">0</div>
+                                    <div class="col" data-x="2" data-y="5">0</div>
+                                    <div class="col" data-x="3" data-y="5">0</div>
+                                    <div class="col" data-x="4" data-y="5">0</div>
+                                    <div class="col" data-x="5" data-y="5">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col">
+                                <div class="row">
+                                    <div id="idCalculoCustoX1" class="col" data-x="1" data-calc='-2' data-value="100">0
+                                    </div>
+                                    <div id="idCalculoCustoX2" class="col" data-x="2" data-calc='-1' data-value="200">0
+                                    </div>
+                                    <div id="idCalculoCustoX3" class="col valor-input" data-calc='0' data-x="3"
+                                        data-value="300">0</div>
+                                    <div id="idCalculoCustoX4" class="col" data-x="4" data-calc='1' data-value="400">0
+                                    </div>
+                                    <div id="idCalculoCustoX5" class="col" data-x="5" data-calc='2' data-value="500">0
+                                    </div>
+                                    <div>Produtividade (kg de peso vivo / hectare)</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-lg-9 col-md-9 ms-auto">
+                <h2>Preço</h2>
+                <div class="row">
+                    <div class="col-2">
+                        Custo (R$ / hectare)
+                    </div>
+
+                    <div class="col-10">
+                        <div class="row">
+                            <div id="idCalculoPrecoY1" class="base-calculo-y col" data-calc='2' data-y="1"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-preco">
+                                    <div class="col" data-x="1" data-y="1">0</div>
+                                    <div class="col" data-x="2" data-y="1">0</div>
+                                    <div class="col" data-x="3" data-y="1">0</div>
+                                    <div class="col" data-x="4" data-y="1">0</div>
+                                    <div class="col" data-x="5" data-y="1">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoPrecoY2" class="base-calculo-y col" data-calc='1' data-y="2"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-preco">
+                                    <div class="col" data-x="1" data-y="2">0</div>
+                                    <div class="col" data-x="2" data-y="2">0</div>
+                                    <div class="col" data-x="3" data-y="2">0</div>
+                                    <div class="col" data-x="4" data-y="2">0</div>
+                                    <div class="col" data-x="5" data-y="2">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoPrecoY3" class="base-calculo-y col valor-input" data-calc='0' data-y="3"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-preco">
+                                    <div class="col" data-x="1" data-y="3">0</div>
+                                    <div class="col" data-x="2" data-y="3">0</div>
+                                    <div class="col valor-input" data-x="3" data-y="3">0</div>
+                                    <div class="col" data-x="4" data-y="3">0</div>
+                                    <div class="col" data-x="5" data-y="3">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoPrecoY4" class="base-calculo-y col" data-calc='-1' data-y="4"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-preco">
+                                    <div class="col" data-x="1" data-y="4">0</div>
+                                    <div class="col" data-x="2" data-y="4">0</div>
+                                    <div class="col" data-x="3" data-y="4">0</div>
+                                    <div class="col" data-x="4" data-y="4">0</div>
+                                    <div class="col" data-x="5" data-y="4">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoPrecoY5" class="base-calculo-y col" data-calc='-2' data-y="5"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-preco">
+                                    <div class="col" data-x="1" data-y="5">0</div>
+                                    <div class="col" data-x="2" data-y="5">0</div>
+                                    <div class="col" data-x="3" data-y="5">0</div>
+                                    <div class="col" data-x="4" data-y="5">0</div>
+                                    <div class="col" data-x="5" data-y="5">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col">
+                                <div class="row">
+                                    <div id="idCalculoPrecoX1" class="col" data-x="1" data-calc='-2' data-value="0">0
+                                    </div>
+                                    <div id="idCalculoPrecoX2" class="col" data-x="2" data-calc='-1' data-value="0">0
+                                    </div>
+                                    <div id="idCalculoPrecoX3" class="col valor-input" data-calc='0' data-x="3"
+                                        data-value="0">0</div>
+                                    <div id="idCalculoPrecoX4" class="col" data-x="4" data-calc='1' data-value="0">0
+                                    </div>
+                                    <div id="idCalculoPrecoX5" class="col" data-x="5" data-calc='2' data-value="0">0
+                                    </div>
+                                    <div>Produtividade (kg de peso vivo / hectare)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-lg-9 col-md-9 ms-auto">
+                <h2>Produtividade</h2>
+                <div class="row">
+                    <div class="col-2">
+                        Preço do boi gordo (R$/kg vivo)
+                    </div>
+
+                    <div class="col-10">
+                        <div class="row">
+                            <div id="idCalculoProdutividadeY1" class="base-calculo-y col" data-calc='2' data-y="1"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-produtividade">
+                                    <div class="col" data-x="1" data-y="1">0</div>
+                                    <div class="col" data-x="2" data-y="1">0</div>
+                                    <div class="col" data-x="3" data-y="1">0</div>
+                                    <div class="col" data-x="4" data-y="1">0</div>
+                                    <div class="col" data-x="5" data-y="1">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoProdutividadeY2" class="base-calculo-y col" data-calc='1' data-y="2"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-produtividade">
+                                    <div class="col" data-x="1" data-y="2">0</div>
+                                    <div class="col" data-x="2" data-y="2">0</div>
+                                    <div class="col" data-x="3" data-y="2">0</div>
+                                    <div class="col" data-x="4" data-y="2">0</div>
+                                    <div class="col" data-x="5" data-y="2">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoProdutividadeY3" class="base-calculo-y col valor-input" data-calc='0'
+                                data-y="3" data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-produtividade">
+                                    <div class="col" data-x="1" data-y="3">0</div>
+                                    <div class="col" data-x="2" data-y="3">0</div>
+                                    <div class="col valor-input" data-x="3" data-y="3">0</div>
+                                    <div class="col" data-x="4" data-y="3">0</div>
+                                    <div class="col" data-x="5" data-y="3">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoProdutividadeY4" class="base-calculo-y col" data-calc='-1' data-y="4"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-produtividade">
+                                    <div class="col" data-x="1" data-y="4">0</div>
+                                    <div class="col" data-x="2" data-y="4">0</div>
+                                    <div class="col" data-x="3" data-y="4">0</div>
+                                    <div class="col" data-x="4" data-y="4">0</div>
+                                    <div class="col" data-x="5" data-y="4">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="idCalculoProdutividadeY5" class="base-calculo-y col" data-calc='-2' data-y="5"
+                                data-value="0">0</div>
+                            <div class="col">
+                                <div class="row row-results-produtividade">
+                                    <div class="col" data-x="1" data-y="5">0</div>
+                                    <div class="col" data-x="2" data-y="5">0</div>
+                                    <div class="col" data-x="3" data-y="5">0</div>
+                                    <div class="col" data-x="4" data-y="5">0</div>
+                                    <div class="col" data-x="5" data-y="5">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col">
+                                <div class="row">
+                                    <div id="idCalculoProdutividadeX1" class="col" data-x="1" data-calc='-2'
+                                        data-value="0">0</div>
+                                    <div id="idCalculoProdutividadeX2" class="col" data-x="2" data-calc='-1'
+                                        data-value="0">0</div>
+                                    <div id="idCalculoProdutividadeX3" class="col valor-input" data-calc='0' data-x="3"
+                                        data-value="0">0</div>
+                                    <div id="idCalculoProdutividadeX4" class="col" data-x="4" data-calc='1'
+                                        data-value="0">0</div>
+                                    <div id="idCalculoProdutividadeX5" class="col" data-x="5" data-calc='2'
+                                        data-value="0">0</div>
+                                    <div>Custo (R$ / hectare)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <script>
+
+        function calcular() {
+
+            let baseCusto = parseFloat(document.getElementById('idBaseCusto').value); // 150;
+            let basePreco = parseFloat(document.getElementById('idBasePreco').value); // 0.6;
+            let baseProdutividade = parseFloat(document.getElementById('idBaseProdutividade').value); // 100;
+
+            let custo = parseFloat(document.getElementById('idCusto').value);
+            let preco = parseFloat(document.getElementById('idPrecoBoiGordo').value);
+            let produtividade = parseFloat(document.getElementById('idProdutividade').value);
+
+            const elmentCusto = document.getElementsByClassName('row-results-custo');
+            const elmentPreco = document.getElementsByClassName('row-results-preco');
+            const elmentProdutividade = document.getElementsByClassName('row-results-produtividade');
+
+            let baseCalculoY;
+            let baseCalculoX;
+            let y;
+            let x;
+            var custoValorMaxMin = [];
+            var precoValorMaxMin = [];
+            var produtividadeValorMaxMin = [];
+            var data = [];
+            if (!Number.isNaN(custo) && !Number.isNaN(preco) && !Number.isNaN(produtividade)) {
+                //Calculo por custo
+                Array.prototype.forEach.call(elmentCusto, items => {
+                    Array.prototype.forEach.call(items.children, item => {
+                        y = item.dataset.y;
+                        x = item.dataset.x;
+                        calcBasePreco = parseFloat(document.getElementById('idCalculoCustoY' + y).dataset.calc) * basePreco + preco;
+                        calcBaseprodutividade = parseFloat(document.getElementById('idCalculoCustoX' + x).dataset.calc) * baseProdutividade + produtividade;
+                        document.getElementById('idCalculoCustoY' + y).dataset.value = calcBasePreco;
+                        document.getElementById('idCalculoCustoY' + y).innerHTML = calcBasePreco;
+                        document.getElementById('idCalculoCustoX' + x).dataset.value = calcBaseprodutividade;
+                        document.getElementById('idCalculoCustoX' + x).innerHTML = calcBaseprodutividade;
+                        baseCalculoY = parseFloat(document.getElementById('idCalculoCustoY' + y).dataset.value);
+                        baseCalculoX = parseFloat(document.getElementById('idCalculoCustoX' + x).dataset.value);
+                        item.innerHTML = Math.round((baseCalculoY * baseCalculoX) - custo, -1);
+                        if (y == 5 && x == 1) {
+                            data[0] = {
+                                valor: (baseCalculoY * baseCalculoX) - custo,
+                                per: 0
+                            }
+                            custoValorMaxMin = data;
+                        }
+                        if (y == 3 && x == 3) {
+                            data[1] = {
+                                valor: (baseCalculoY * baseCalculoX) - custo,
+                                per: 50
+                            }
+                            custoValorMaxMin = data;
+                        }
+                        if (y == 1 && x == 5) {
+                            data[2] = {
+                                valor: (baseCalculoY * baseCalculoX) - custo,
+                                per: 100
+                            }
+                            custoValorMaxMin = data;
+                        }
+                    });
+                });
+
+                //alterar cor
+                Array.prototype.forEach.call(elmentCusto, items => {
+                    Array.prototype.forEach.call(items.children, item => {
+
+                        let valor = parseFloat(item.innerHTML);
+                        valorMax = custoValorMaxMin[2];
+                        valorMin = custoValorMaxMin[0];
+                        result = Math.round((valor * 100) / valorMax.valor);
+
+                        if (result < 25) {
+                            item.classList.add("background-custo-0");
+                        }
+                        if (result >= 25 && result < 50) {
+                            item.classList.add("background-custo-25");
+                        }
+                        if (result >= 50 && result < 75) {
+                            item.classList.add("background-custo-50");
+                        }
+                        if (result >= 75) {
+                            item.classList.add("background-custo-100");
+                        }
+                    });
+                });
+                //end Custo
+
+                //Calculo por preço
+                Array.prototype.forEach.call(elmentPreco, items => {
+                    Array.prototype.forEach.call(items.children, item => {
+                        y = item.dataset.y;
+                        x = item.dataset.x;
+                        calcBaseCusto = parseFloat(document.getElementById('idCalculoPrecoY' + y).dataset.calc) * baseCusto + custo;
+                        calcBaseprodutividade = parseFloat(document.getElementById('idCalculoPrecoX' + x).dataset.calc) * baseProdutividade + produtividade;
+                        document.getElementById('idCalculoPrecoY' + y).dataset.value = calcBaseCusto;
+                        document.getElementById('idCalculoPrecoY' + y).innerHTML = calcBaseCusto;
+                        document.getElementById('idCalculoPrecoX' + x).dataset.value = calcBaseprodutividade;
+                        document.getElementById('idCalculoPrecoX' + x).innerHTML = calcBaseprodutividade;
+                        baseCalculoY = parseFloat(document.getElementById('idCalculoPrecoY' + y).dataset.value);
+                        baseCalculoX = parseFloat(document.getElementById('idCalculoPrecoX' + x).dataset.value);
+                        item.innerHTML = (preco * baseCalculoX) - baseCalculoY;
+
+                        if (y == 1 && x == 1) {
+                            data[0] = {
+                                valor: (preco * baseCalculoX) - baseCalculoY,
+                                per: 0
+                            }
+                            precoValorMaxMin = data;
+                        }
+                        if (y == 3 && x == 3) {
+                            data[1] = {
+                                valor: (preco * baseCalculoX) - baseCalculoY,
+                                per: 50
+                            }
+                            precoValorMaxMin = data;
+                        }
+                        if (y == 5 && x == 5) {
+                            data[2] = {
+                                valor: (preco * baseCalculoX) - baseCalculoY,
+                                per: 100
+                            }
+                            precoValorMaxMin = data;
+                        }
+                    });
+                });
+
+                Array.prototype.forEach.call(elmentPreco, items => {
+                    Array.prototype.forEach.call(items.children, item => {
+                        let valor = parseFloat(item.innerHTML);
+                        valorMax = custoValorMaxMin[2];
+                        result = Math.round((valor * 100) / valorMax.valor);
+                        if (result >= 0) {
+                            item.style.background = 'linear-gradient(90deg, rgba(125,198,125,1) 0%, rgba(255,255,255,1) ' + result + '%)';
+                        } else {
+                            result = 100 - (result * -1)
+                            item.style.background = 'linear-gradient(90deg, rgba(255,255,255,1) ' + result + '%, rgba(245,58,58,1) 100%)';
+                        }
+                    });
+                });
+
+                //Calculo por Produtividade
+                Array.prototype.forEach.call(elmentProdutividade, items => {
+                    Array.prototype.forEach.call(items.children, item => {
+                        y = item.dataset.y;
+                        x = item.dataset.x;
+                        calcBasePreco = parseFloat(document.getElementById('idCalculoProdutividadeY' + y).dataset.calc) * basePreco + preco;
+                        calcBaseCusto = parseFloat(document.getElementById('idCalculoProdutividadeX' + x).dataset.calc) * baseCusto + custo;
+                        document.getElementById('idCalculoProdutividadeY' + y).dataset.value = calcBasePreco;
+                        document.getElementById('idCalculoProdutividadeY' + y).innerHTML = calcBasePreco;
+                        document.getElementById('idCalculoProdutividadeX' + x).dataset.value = calcBaseCusto;
+                        document.getElementById('idCalculoProdutividadeX' + x).innerHTML = calcBaseCusto;
+                        baseCalculoY = parseFloat(document.getElementById('idCalculoProdutividadeY' + y).dataset.value);
+                        baseCalculoX = parseFloat(document.getElementById('idCalculoProdutividadeX' + x).dataset.value);
+                        item.innerHTML = (baseCalculoY * produtividade) - baseCalculoX;
+
+                        if (y == 5 && x == 5) {
+                            data[0] = {
+                                valor: (baseCalculoY * produtividade) - baseCalculoX,
+                                per: 0
+                            }
+                            produtividadeValorMaxMin = data;
+                        }
+                        if (y == 3 && x == 3) {
+                            data[1] = {
+                                valor: (baseCalculoY * produtividade) - baseCalculoX,
+                                per: 50
+                            }
+                            produtividadeValorMaxMin = data;
+                        }
+                        if (y == 1 && x == 1) {
+                            data[2] = {
+                                valor: (baseCalculoY * produtividade) - baseCalculoX,
+                                per: 100
+                            }
+                            precoValorMaxMin = data;
+                        }
+                    });
+                });
+
+                Array.prototype.forEach.call(elmentProdutividade, items => {
+                    Array.prototype.forEach.call(items.children, item => {
+                        let valor = parseFloat(item.innerHTML);
+                        valorMax = custoValorMaxMin[2];
+                        result = Math.round((valor * 100) / valorMax.valor);
+                        item.style.background = 'rgba(125,198,125, ' + result + '%)';
+
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
