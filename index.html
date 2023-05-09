@@ -9,6 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <style>
+        .table-custo {
+            background: linear-gradient(90deg, rgba(240,63,63,1) 0%, rgba(237,228,38,1) 48%, rgba(41,167,43,1) 100%);
+        }
         .row-results-custo {
             border-radius: 4px;
         }
@@ -21,20 +24,20 @@
             background: #f8746d;
         }
 
-        .background-custo-25 {
+        .background-custo-0-25 {
             background: #fbaf78;
         }
 
-        .background-custo-50 {
+        .background-custo-25-50 {
             background: #ffeb84;
         }
 
-        .background-custo-75 {
-            background: #cbdc81;
+        .background-custo-50-75 {
+            background: #85bb85;
         }
 
-        .background-custo-100 {
-            background: #7dc67d;
+        .background-custo-75-100 {
+            background: #489248;
         }
 
         .row-results-custo div,
@@ -65,34 +68,37 @@
         <div class="row row-cols-1 row-cols-md-2">
             <div class="card col-lg-3 col-md-3 p-2">
                 <form>
-                    <div class="form-floating mb-3">
-                        
+                    <div class="form-floating">                        
                         <input type="text" class="form-control" id="idCusto" placeholder="Custo (R$/hectare)"
                             value="850">
-                            <label for="idCusto">Custo (R$/hectare)</label>
-                        
+                            <label for="idCusto">Custo (R$/hectare)</label>                        
                     </div>
-                    <div class="col-sm-12 x-0">
-                        <input type="text" class="form-control form-control-sm" id="idBaseCusto"
+                    <div class="form-floating col-sm-12 mb-3">
+                        <input type="text" class="form-control" id="idBaseCusto"
                             placeholder="Escala Custo" value="150">
+                            <label for="idPrecoBoiGordo">Intervalo do custo</label>
                     </div>
-                    <div class="form-floating mb-3">
+
+                    <div class="form-floating">
                         <input type="text" class="form-control" id="idPrecoBoiGordo"
                             placeholder="Preço do boi gordo (R$/kg vivo)" value="5">
                         <label for="idPrecoBoiGordo">Preço do boi gordo (R$/kg vivo)</label>
                     </div>
-                    <div class="col-sm-12 x-0">
-                        <input type="text" class="form-control form-control-sm" id="idBasePreco"
+                    <div class="form-floating col-sm-12 mb-3">
+                        <input type="text" class="form-control" id="idBasePreco"
                             placeholder="Escala Preço" value="0.5">
+                            <label for="idPrecoBoiGordo">Intervalo do preço</label>
                     </div>
-                    <div class="form-floating mb-3">
+
+                    <div class="form-floating">
                         <input type="text" class="form-control" id="idProdutividade"
                             placeholder="Produtividade (kg de peso vivo/hectare)" value="300">
                         <label for="idCusto">Produtividade (kg de peso vivo/hectare)</label>
                     </div>
-                    <div class="col-sm-12 x-0">
-                        <input type="text" class="form-control form-control-sm" id="idBaseProdutividade"
+                    <div class="form-floating col-sm-12 mb-3">
+                        <input type="text" class="form-control" id="idBaseProdutividade"
                             placeholder="Escala Produtividade" value="100">
+                            <label for="idPrecoBoiGordo">Intervalo do produtividade</label>
                     </div>
                 </form>
                 <div class="form-floating mb-3">
@@ -473,31 +479,9 @@
                         }
                     });
                 });
-
-                //alterar cor
-                Array.prototype.forEach.call(elmentCusto, items => {
-                    Array.prototype.forEach.call(items.children, item => {
-
-                        let valor = parseFloat(item.innerHTML);
-                        valorMax = custoValorMaxMin[2];
-                        valorMin = custoValorMaxMin[0];
-                        result = Math.round((valor * 100) / valorMax.valor);
-
-                        if (result < 25) {
-                            item.classList.add("background-custo-0");
-                        }
-                        if (result >= 25 && result < 50) {
-                            item.classList.add("background-custo-25");
-                        }
-                        if (result >= 50 && result < 75) {
-                            item.classList.add("background-custo-50");
-                        }
-                        if (result >= 75) {
-                            item.classList.add("background-custo-100");
-                        }
-                    });
-                });
-                //end Custo
+                Array.prototype.forEach.call(document.getElementsByClassName('row-results-custo'), item => {
+                    item.classList.add('table-custo');
+                })
 
                 //Calculo por preço
                 Array.prototype.forEach.call(elmentPreco, items => {
