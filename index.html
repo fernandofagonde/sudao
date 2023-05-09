@@ -483,39 +483,6 @@
                     item.classList.add('table-custo');
                 })
 
-                //alterar cor
-                Array.prototype.forEach.call(elmentCusto, items => {
-                    Array.prototype.forEach.call(items.children, item => {
-
-                        let valor = parseFloat(item.innerHTML);
-                        valorMax = custoValorMaxMin[2];
-                        valorMin = custoValorMaxMin[0];
-                        result = Math.round((valor * 100) / valorMax.valor);
-
-                        //item.classList.add("background-custo-0");
-
-                        //document.getElementsByClassName('.row-results-custo').classList.add('table-preco');
-                        
-                        // console.log(document.getElementsByClassName('row-results-preco'));
-                        /*if (result < 0) {
-                            item.classList.add("background-custo-0");
-                        }
-                        if (result > 0 && result < 25) {
-                            item.classList.add("background-custo-0-25");
-                        }
-                        if (result >= 25 && result < 50) {
-                            item.classList.add("background-custo-25-50");
-                        }
-                        if (result >= 50 && result < 75) {
-                            item.classList.add("background-custo-50-75");
-                        }
-                        if (result >= 75) {
-                            item.classList.add("background-custo-75-100");
-                        }*/
-                    });
-                });
-                //end Custo
-
                 //Calculo por preço
                 Array.prototype.forEach.call(elmentPreco, items => {
                     Array.prototype.forEach.call(items.children, item => {
